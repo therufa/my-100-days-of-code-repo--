@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3d stuff</title>
+</head>
+<body>
+    
+    <canvas id="canvas" width="500" height="400"></canvas>
+    
+    <script type="x-shader/x-vertex" id="VertexShader">
+      attribute vec3 aVertexPosition;
+      void main(void) {
+        gl_Position = vec4(aVertexPosition, 1.0);
+      }
+    </script>
+    <script type="x-shader/x-fragment" id="FragmentShader">
+      void main(void) {
+        gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+      }
+    </script>
+    <script src="./bundle.js"></script>
+</body>
+</html>

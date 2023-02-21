@@ -1,0 +1,8 @@
+# generate gitignore for a node project
+
+node_modules
+.DS_Store
+npm-debug.log
+yarn-error.log
+
+./project/bundle.js

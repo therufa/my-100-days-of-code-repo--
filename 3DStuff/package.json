@@ -1,0 +1,21 @@
+{
+  "name": "3DStuff",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "esbuild src/index.mjs --outfile=./public/bundle.js --bundle --watch",
+    "build": "esbuild src/index.mjs --outfile=./public/bundle.js --bundle"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gl-matrix": "^3.4.3"
+  },
+  "devDependencies": {
+    "@types/gl-matrix": "^3.2.0",
+    "esbuild": "^0.17.10"
+  }
+}
