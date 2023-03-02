@@ -1,12 +1,10 @@
-type CompundType = { pos: number; neg: number } | { posneg: number };
-
-const compoundObj: CompundType[] = [
+const unionArrObj: UnionType[] = [
   { pos: 1, neg: 2 },
   { posneg: 3 },
   { pos: 4, neg: 5 },
 ];
 
-Object.entries(compoundObj).forEach(([key, value]) => {
+Object.entries(unionArrObj).forEach(([key, value]) => {
   // value is of type CompundType
   // key is of type string
 });
@@ -24,26 +22,25 @@ Object.entries(someRecord).forEach(([key, value]) => {
 const objectEntries = <T extends {}>(obj: T) =>
   Object.entries(obj) as [keyof T, T[keyof T]][];
 
-const b = objectEntries(compoundObj);
+type UnionType = { pos: number; neg: number } | { posneg: number };
+
+type UnionToIntersect<U> = (U extends any ? (k: U) => void : never) extends (
+  k: infer I
+) => void
+  ? I
+  : never;
+
+function objectThings<T extends any>(obj: UnionType) {
+  return Object.entries(obj) as [
+    keyof UnionToIntersect<T>,
+    UnionToIntersect<T>[keyof UnionToIntersect<T>]
+  ][];
+}
+
+const a = objectEntries(unionArrObj[0]);
 //    ^?
 
-const objEntries = Object.entries as unknown as <T extends {}>(
-  obj: T
-) => [keyof T, T[keyof T][]];
-const a = objEntries(compoundObj);
+const b = objectThings<UnionType>(unionArrObj[0]);
 //    ^?
 
-a;
-b;
-
-a.forEach(([key, value]) => {
-  // key is of type SomeKeys
-  // value is of type number
-  console.log(key, value);
-});
-
-b.forEach(([key, value]) => {
-  // key is of type SomeKeys
-  // value is of type number
-  console.log(key, value);
-});
+console.log(b);
