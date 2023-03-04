@@ -1,6 +1,11 @@
+case class Person(name: String, age: Int)
+
 @main def hello: Unit =
   println(area(circle))
   println(area(rectangle))
+  // instantiate a Person adnd print it's name
+  val person = Person("John Don", 30)
+  println(person.name)
 end hello
 
 def hellos: Unit =
