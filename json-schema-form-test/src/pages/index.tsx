@@ -1,10 +1,18 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
-import { JsonForms } from '@jsonforms/react'
-import { vanillaRenderers } from '@jsonforms/vanilla-renderers'
+import { JsonForms } from "@jsonforms/react";
+import { vanillaCells, vanillaRenderers } from "@jsonforms/vanilla-renderers";
 
-const initialData = {}
+const initialData = {
+  name: "John Doe",
+  vegetarian: false,
+  birthDate: "1985-06-02",
+  personalData: {
+    age: 34,
+  },
+  postalCode: "12345",
+};
 
 const Home: NextPage = () => {
   const [formData, setData] = useState<Record<string, unknown>>(initialData);
@@ -22,6 +30,7 @@ const Home: NextPage = () => {
           schema={schema}
           uischema={uischema}
           renderers={vanillaRenderers}
+          cells={vanillaCells}
           onChange={({ data }) => setData(data as typeof formData)}
         />
       </main>
@@ -31,108 +40,94 @@ const Home: NextPage = () => {
 
 export default Home;
 
-
 const schema = {
-  "type": "object",
-  "properties": {
-    "name": {
-      "type": "string",
-      "minLength": 3,
-      "description": "Please enter your name"
+  type: "object",
+  properties: {
+    name: {
+      type: "string",
+      minLength: 3,
+      description: "Please enter your name",
     },
-    "vegetarian": {
-      "type": "boolean"
+    vegetarian: {
+      type: "boolean",
     },
-    "birthDate": {
-      "type": "string",
-      "format": "date"
+    birthDate: {
+      type: "string",
+      format: "date",
     },
-    "nationality": {
-      "type": "string",
-      "enum": [
-        "DE",
-        "IT",
-        "JP",
-        "US",
-        "RU",
-        "Other"
-      ]
+    nationality: {
+      type: "string",
+      enum: ["DE", "IT", "JP", "US", "RU", "Other"],
     },
-    "personalData": {
-      "type": "object",
-      "properties": {
-        "age": {
-          "type": "integer",
-          "description": "Please enter your age."
+    personalData: {
+      type: "object",
+      properties: {
+        age: {
+          type: "integer",
+          description: "Please enter your age.",
         },
-        "height": {
-          "type": "number"
+        height: {
+          type: "number",
         },
-        "drivingSkill": {
-          "type": "number",
-          "maximum": 10,
-          "minimum": 1,
-          "default": 7
-        }
+        drivingSkill: {
+          type: "number",
+          maximum: 10,
+          minimum: 1,
+          default: 7,
+        },
       },
-      "required": [
-        "age",
-        "height"
-      ]
+      required: ["age", "height"],
     },
-    "occupation": {
-      "type": "string"
+    occupation: {
+      type: "string",
     },
-    "postalCode": {
-      "type": "string",
-      "maxLength": 5
-    }
+    postalCode: {
+      type: "string",
+      maxLength: 5,
+    },
   },
-  "required": [
-    "occupation",
-    "nationality"
-  ]
-}
+  required: ["occupation", "nationality"],
+};
 
 const uischema = {
-  "type": "VerticalLayout",
-  "elements": [
+  type: "VerticalLayout",
+  elements: [
     {
-      "type": "HorizontalLayout",
-      "elements": [
+      type: "HorizontalLayout",
+      elements: [
         {
-          "type": "Control",
-          "scope": "#/properties/name"
+          type: "Control",
+          scope: "#/properties/name",
         },
         {
-          "type": "Control",
-          "scope": "#/properties/personalData/properties/age"
+          type: "Control",
+          scope: "#/properties/personalData/properties/age",
         },
         {
-          "type": "Control",
-          "scope": "#/properties/birthDate"
-        }
-      ]
+          type: "Control",
+          scope: "#/properties/birthDate",
+        },
+      ],
     },
     {
-      "type": "Label",
-      "text": "Additional Information"
+      type: "Label",
+      text: "Additional Information",
     },
     {
-      "type": "HorizontalLayout",
-      "elements": [
+      type: "HorizontalLayout",
+      elements: [
         {
-          "type": "Control",
-          "scope": "#/properties/personalData/properties/height"
+          type: "Control",
+          scope: "#/properties/personalData/properties/height",
         },
         {
-          "type": "Control",
-          "scope": "#/properties/nationality"
+          type: "Control",
+          scope: "#/properties/nationality",
         },
         {
-          "type": "Control",
-          "scope": "#/properties/occupation",
-          "suggestion": [
+          type: "Control",
+          scope: "#/properties/occupation",
+          suggestion: [
             "Accountant",
             "Engineer",
             "Freelancer",
@@ -140,10 +135,10 @@ const uischema = {
             "Physician",
             "Student",
             "Teacher",
-            "Other"
-          ]
-        }
-      ]
-    }
-  ]
-}
+            "Other",
+          ],
+        },
+      ],
+    },
+  ],
+};
