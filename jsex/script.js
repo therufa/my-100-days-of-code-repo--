@@ -9,7 +9,12 @@ app.innerHTML = `<div>
   <div id="myInput"></div>
 </div>`;
 
-document.querySelector("#myInput").replaceWith(MyInput());
+const fragment = document.createDocumentFragment();
+fragment.appendChild(MyInput());
+fragment.appendChild(MyInput());
+fragment.appendChild(MyInput());
+
+document.querySelector("#myInput").replaceWith(fragment);
 
 const nameNode = document.createTextNode("")
 document.querySelector("#name").replaceWith(nameNode);
