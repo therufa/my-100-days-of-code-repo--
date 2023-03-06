@@ -1,9 +1,9 @@
 "use strict";
 
-const app = document.querySelector("#app");
 
 const [myName, setMyName] = signel("Piskóta");
 
+const app = document.querySelector("#app");
 app.innerHTML = `<div>
   <div>Hello, <span id="name"></span>!</div>
   <div id="myInput"></div>
@@ -35,9 +35,6 @@ function signel(initialValue) {
       target[prop] = value;
       listeners.forEach(listener => listener(value));
       return true;
-    },
-    get: (target, prop) => {
-      return target[prop];
     }
   });
 
