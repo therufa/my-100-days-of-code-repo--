@@ -9,11 +9,11 @@ app.innerHTML = `<div>
   <div id="myInput"></div>
 </div>`;
 
-document.querySelector("#myInput").appendChild(MyInput());
-document.querySelector("#myInput").appendChild(MyInput());
+document.querySelector("#myInput").replaceWith(MyInput());
 
-const nameItem = document.querySelector("#name")
-myName(nameItem)
+const nameNode = document.createTextNode("")
+document.querySelector("#name").replaceWith(nameNode);
+myName(nameNode)
 
 function MyInput() {
   function onInput(e) {
@@ -43,8 +43,11 @@ function signel(initialValue) {
   };
   const bindSignel = (target) => {
     const setTarget = (value) => {
+      console.log(target, value)
       if (target.value !== undefined) 
         target.value = value;
+      else if (target.textContent !== undefined)
+        target.textContent = value;
       else
         target.innerHTML = value;
     };
